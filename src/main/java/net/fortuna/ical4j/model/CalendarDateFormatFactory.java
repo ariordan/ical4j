@@ -31,6 +31,7 @@
  */
 package net.fortuna.ical4j.model;
 
+import net.fortuna.ical4j.util.TimeZones;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,7 +103,7 @@ public final class CalendarDateFormatFactory {
          */
         private static final long serialVersionUID = -4191402739860280205L;
 
-        private static final java.util.TimeZone DEFAULT_TIME_ZONE = TimeZone.getDefault();
+        private static final java.util.TimeZone DEFAULT_TIME_ZONE = TimeZones.getDefault();
 
         private final String pattern;
 

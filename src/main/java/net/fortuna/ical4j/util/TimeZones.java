@@ -62,6 +62,8 @@ public final class TimeZones {
         UTC_TIMEZONE = TimeZone.getTimeZone(UTC_ID);
     }
 
+    private static final ThreadTimeZones threadTimeZone = new ThreadTimeZones();
+
     /**
      * Constructor made private to enforce static nature.
      */
@@ -85,7 +87,24 @@ public final class TimeZones {
         if ("true".equals(Configurator.getProperty("net.fortuna.ical4j.timezone.default.utc").orElse("false"))) {
             return getUtcTimeZone();
         }
-        return TimeZone.getDefault();
+
+        // Get the default TimeZone for the current thread. If not set, the value of
+        // TimeZone.getDefault() will be set for the current thread and returned.
+        return threadTimeZone.get();
+    }
+
+    /**
+     * Set the default TimeZone for the current thread.
+     */
+    public static void setDefault(TimeZone zone) {
+        threadTimeZone.set(zone);
+    }
+
+    /**
+     * Clear the default TimeZone for the current thread.
+     */
+    public static void clearDefault() {
+        threadTimeZone.remove();
     }
 
     /**
@@ -102,7 +121,7 @@ public final class TimeZones {
      */
     public static TimeZone getDateTimeZone() {
     	if ("true".equals(Configurator.getProperty("net.fortuna.ical4j.timezone.date.floating").orElse("false"))) {
-    		return TimeZone.getDefault();
+    		return threadTimeZone.get();
     	}
     	return getUtcTimeZone();
     }
@@ -112,5 +131,12 @@ public final class TimeZones {
      */
     public static TimeZone getUtcTimeZone() {
         return UTC_TIMEZONE;
+    }
+
+    private static class ThreadTimeZones extends ThreadLocal<TimeZone> {
+        @Override
+        protected TimeZone initialValue() {
+            return TimeZone.getDefault();
+        }
     }
 }

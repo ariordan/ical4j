@@ -32,6 +32,7 @@
 package net.fortuna.ical4j.model;
 
 import net.fortuna.ical4j.util.Dates;
+import net.fortuna.ical4j.util.TimeZones;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.IOException;
@@ -217,7 +218,7 @@ public class Dur implements Comparable<Dur>, Serializable {
         if (start instanceof net.fortuna.ical4j.model.Date) {
             startCal = Dates.getCalendarInstance((net.fortuna.ical4j.model.Date)start);
         } else {
-            startCal = Calendar.getInstance();
+            startCal = Calendar.getInstance(TimeZones.getDefault());
         }
         startCal.setTime(start);
         final Calendar endCal = Calendar.getInstance(startCal.getTimeZone());
@@ -281,7 +282,7 @@ public class Dur implements Comparable<Dur>, Serializable {
         if (start instanceof net.fortuna.ical4j.model.Date) {
             cal = Dates.getCalendarInstance((net.fortuna.ical4j.model.Date)start);
         } else {
-            cal = Calendar.getInstance();
+            cal = Calendar.getInstance(TimeZones.getDefault());
         }
 
         cal.setTime(start);

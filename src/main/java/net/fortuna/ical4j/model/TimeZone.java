@@ -38,6 +38,7 @@ import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.TzId;
 import net.fortuna.ical4j.model.property.TzOffsetFrom;
 import net.fortuna.ical4j.model.property.TzOffsetTo;
+import net.fortuna.ical4j.util.TimeZones;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -86,7 +87,7 @@ public class TimeZone extends java.util.TimeZone {
         final int second = ms / 1000;
         ms -= second * 1000;
 
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance(TimeZones.getDefault());
         cal.clear();    // don't retain current date/time, it may disturb the calculation
 
         // set date and time

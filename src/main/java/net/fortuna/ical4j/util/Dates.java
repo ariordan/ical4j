@@ -137,7 +137,7 @@ public final class Dates {
         if (weekNo > 0) {
             return weekNo;
         }
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance(TimeZones.getDefault());
         cal.setTime(date);
         final int year = cal.get(Calendar.YEAR);
         // construct a list of possible week numbers..
@@ -167,7 +167,7 @@ public final class Dates {
         if (yearDay > 0) {
             return yearDay;
         }
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance(TimeZones.getDefault());
         cal.setTime(date);
         final int year = cal.get(Calendar.YEAR);
         // construct a list of possible year days..
@@ -197,7 +197,7 @@ public final class Dates {
         if (monthDay > 0) {
             return monthDay;
         }
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance(TimeZones.getDefault());
         cal.setTime(date);
         final int month = cal.get(Calendar.MONTH);
         // construct a list of possible month days..
@@ -242,7 +242,7 @@ public final class Dates {
             }
             else {
             	// a date-time without a timezone but not UTC is floating
-                instance = Calendar.getInstance();
+                instance = Calendar.getInstance(TimeZones.getDefault());
             }
         }
         else {
@@ -276,7 +276,7 @@ public final class Dates {
      * explicit timezone.
      */
     public static long round(final long time, final int precision) {
-        return round(time, precision, TimeZone.getDefault());
+        return round(time, precision, TimeZones.getDefault());
 //        return round(time, precision, TimeZone.getTimeZone(TimeZones.UTC_ID));
         /*
         long newTime = time;

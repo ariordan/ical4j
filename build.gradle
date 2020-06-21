@@ -104,7 +104,7 @@ task sourcesJar(type: Jar) {
     archiveClassifier = 'sources'
 }
 
-jar.enabled = false
+// jar.enabled = false
 build.dependsOn bundle
 
 artifacts {

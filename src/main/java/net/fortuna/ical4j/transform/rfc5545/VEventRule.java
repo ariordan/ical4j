@@ -7,6 +7,7 @@ import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.DateProperty;
 import net.fortuna.ical4j.model.property.DtStamp;
+import net.fortuna.ical4j.util.TimeZones;
 
 import java.util.Calendar;
 import java.util.List;
@@ -49,7 +50,7 @@ public class VEventRule implements Rfc5545ComponentRule<VEvent> {
                     start.getValue().equals(end.getValue())){
                 if (end instanceof DateProperty) {
                     DateProperty endDate = (DateProperty) end;
-                    Calendar cal = Calendar.getInstance();
+                    Calendar cal = Calendar.getInstance(TimeZones.getDefault());
                     cal.setTime(endDate.getDate());
                     cal.add(Calendar.DATE, 1);
                     endDate.setDate(new Date(cal.getTime()));
