@@ -97,7 +97,7 @@ public final class TimeZones {
      * Set the default TimeZone for the current thread.
      */
     public static void setDefault(TimeZone zone) {
-        threadTimeZone.set(zone);
+        threadTimeZone.set(zone.getClass().equals(TimeZone.class) ? zone : TimeZone.getTimeZone(zone.getID()));
     }
 
     /**
